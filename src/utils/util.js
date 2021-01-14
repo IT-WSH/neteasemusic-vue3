@@ -97,7 +97,6 @@ export const pauseAllMedia = function(env) {
   }
 }
 
-// 返回是否直播，VIP会员，企业收银台是否过期，还剩几天过期
 // expiretime：Number
 export const expireTimeChangeFun = expiretime => {
   let endtime = new Date(String(new Date(expiretime)).split(' ')[0])

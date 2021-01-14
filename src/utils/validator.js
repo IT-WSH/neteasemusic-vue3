@@ -1,11 +1,3 @@
-/*
- * @Descripttion:
- * @version: 1.0
- * @Author: pei qi wu
- * @Date: 2019-12-09 18:04:01
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-07-21 14:09:41
- */
 /**
  *
  *表单验证规则
