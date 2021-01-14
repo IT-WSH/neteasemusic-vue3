@@ -1,0 +1,126 @@
+/* 
+横向排列 垂直居中
+*/
+.flex-a {
+	/* #ifndef APP-NVUE */
+  display: flex;
+	/* #endif */
+  align-items: center;
+}
+/* 
+横向排列 水平居中
+*/
+.flex-j {
+	/* #ifndef APP-NVUE */
+  display: flex;
+	/* #endif */
+  justify-content: center;
+}
+/* 
+横向排列 水平垂直居中
+*/
+.flex-aj {
+	/* #ifndef APP-NVUE */
+  display: flex;
+	/* #endif */
+  justify-content: center;
+  align-items: center;
+}
+
+/* 
+纵向排列
+*/
+.flex-d {
+	/* #ifndef APP-NVUE */
+  display: flex;
+	/* #endif */
+  flex-direction: column;
+}
+/* 
+纵向排列 垂直居中
+*/
+.flex-jd {
+	/* #ifndef APP-NVUE */
+  display: flex;
+	/* #endif */
+  flex-direction: column;
+  justify-content: center;
+}
+/* 
+纵向排列 水平居中
+*/
+.flex-ad {
+	/* #ifndef APP-NVUE */
+  display: flex;
+	/* #endif */
+  flex-direction: column;
+  align-items: center;
+}
+/* 
+纵向排列 水平垂直居中
+*/
+.flex-ajd {
+	/* #ifndef APP-NVUE */
+  display: flex;
+	/* #endif */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* 
+纵向排列 水平垂直居中
+*/
+.flex-lrj {
+	/* #ifndef APP-NVUE */
+  display: flex;
+	/* #endif */
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+/* 
+横向排列 左右两边靠齐垂直居中
+*/
+.flex-lra {
+	/* #ifndef APP-NVUE */
+  display: flex;
+	/* #endif */
+  justify-content: space-between;
+  align-items: center;
+}
+/* 
+横向排列 左右两边靠齐
+*/
+.flex-lr {
+	/* #ifndef APP-NVUE */
+  display: flex;
+	/* #endif */
+  justify-content: space-between;
+}
+/* 
+文字溢出显示省略号
+*/
+.text-over {
+	/* #ifndef APP-NVUE */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	/* #endif */
+}
+/* 
+清除浮动
+*/
+/* #ifndef APP-NVUE */
+.clear::after {
+  content: "";
+  clear: both;
+  display: block;
+  width: 0;
+  height: 0;
+}
+/* #endif */
+/* 顶部安全距离 */
+.safe-area-inset-top {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}
