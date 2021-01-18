@@ -106,6 +106,7 @@ export default {
   box-sizing: border-box;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding: 0 6px;
   .con_li {
     width: 230px;
     padding-bottom: 16px;

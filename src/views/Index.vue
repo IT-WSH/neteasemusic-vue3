@@ -50,7 +50,6 @@ export default {
         }
       ]
     })
-
     // 进入页面，加载当前路由
     const readRouterCurrent = () => {
       if (!state.footerList || state.footerList.length <= 0) return

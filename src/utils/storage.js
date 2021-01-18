@@ -1,7 +1,7 @@
 export const storage = (key, data) => {
   let headerStr = ''
   key += headerStr
-  if (data) {
+  if (data != undefined && data != 'undefined') {
     // 设置数据
     let datas = { value: data }
     localStorage.setItem(key, JSON.stringify(datas))

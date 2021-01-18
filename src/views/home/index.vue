@@ -3,7 +3,7 @@
     <div class="home_head">
       <div class="placehead safe-area-inset-top"></div>
       <div class="head_content flex-aj safe-area-inset-top">
-        <div class="ipt flex-aj">单曲/歌单/电台{{ count }}</div>
+        <div class="ipt flex-aj">单曲/歌单/电台</div>
       </div>
       <div class="nav">
         <van-tabs
@@ -39,22 +39,25 @@
 <script>
 import { toRefs, reactive, onMounted, ref } from 'vue'
 import { Tabs, Tab } from 'vant'
+import { storage } from '@/utils/storage.js'
 import HomeSelf from './components/home-self.vue'
 import HomeSheet from './components/home-sheet.vue'
 import HomeAnchor from './components/home-anchor.vue'
+import HomeRank from './components/home-rank.vue'
 export default {
   components: {
     [Tabs.name]: Tabs,
     [Tab.name]: Tab,
     HomeSelf,
     HomeSheet,
-    HomeAnchor
+    HomeAnchor,
+    HomeRank
   },
   setup() {
     const count = ref(0)
-
     const state = reactive({
-      active: 0,
+      active: null,
+      scrollTop: [],
       navList: [
         {
           title: '个性推荐',
@@ -71,15 +74,24 @@ export default {
         },
         {
           title: '排行榜',
-          comName: ''
+          comName: 'HomeRank'
         }
       ]
     })
+    // 设置当前位置
+    const setTabIndex = () => {
+      let index = storage('homeTabIndex') || 0
+      state.navList[index].status = true
+      state.active = index
+    }
+    setTabIndex()
     onMounted(() => {})
     // tab切换
     const changeTabFun = index => {
+      storage('homeTabIndex', index)
       state.navList[index].status = true
       count.value++
+      document.body.scrollTop = document.documentElement.scrollTop = 0
     }
     return {
       count,

@@ -56,6 +56,7 @@ const router = createRouter({
 // 全局路由守卫
 router.beforeEach((to, from, next) => {
   // console.log(to, from)
+  window.document.title = to.meta.title == undefined ? '往抑云' : to.meta.title
   const isLogin = true
   if (to.meta.requireAuth) {
     // 判断该路由是否需要登录权限
