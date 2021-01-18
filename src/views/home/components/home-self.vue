@@ -13,8 +13,14 @@
       lazy-render
       @change="onChange"
     >
-      <van-swipe-item>1</van-swipe-item>
-      <van-swipe-item>2</van-swipe-item>
+      <van-swipe-item v-for="item in bannerHome" :key="item.targetId">
+        <van-image
+          width="100%"
+          height="100%"
+          fit="cover"
+          :src="item.imageUrl"
+        />
+      </van-swipe-item>
     </van-swipe>
     <div class="self_grid flex-lra">
       <div class="grid_li flex-ajd">
@@ -71,6 +77,7 @@
 <script>
 import { toRefs, reactive } from 'vue'
 import { Swipe, SwipeItem, PullRefresh, Icon, Image } from 'vant'
+import bannerHome from '@/common/mock/banner-home.js'
 export default {
   name: 'HomeSelf',
   components: {
@@ -83,7 +90,8 @@ export default {
   setup() {
     const state = reactive({
       isLoading: false,
-      list: 10
+      list: 10,
+      bannerHome: bannerHome
     })
     const onChange = () => {}
     const onRefresh = () => {
@@ -205,7 +213,6 @@ export default {
   line-height: 300px;
   height: 260px;
   text-align: center;
-  background-color: #39a9ed;
 }
 .content {
   min-height: 100%;

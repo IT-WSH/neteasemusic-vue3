@@ -15,6 +15,7 @@
           class="tv_li flex-lra"
           v-for="(item, index) in topList"
           :key="index"
+          @click="onLinkPage(item)"
         >
           <div class="tv_li_logo">
             <van-image
@@ -45,7 +46,12 @@
           <div class="tit">全球榜</div>
         </div>
         <div class="list_con flex-lra">
-          <div class="con_li" v-for="(item, index) in list" :key="index">
+          <div
+            class="con_li"
+            v-for="(item, index) in list"
+            :key="index"
+            @click="onLinkPage(item)"
+          >
             <div class="con_li_image">
               <van-image
                 width="100%"
@@ -73,6 +79,7 @@
 import { toRefs, reactive } from 'vue'
 import { List, Cell, Image, Icon } from 'vant'
 import rankData from '@/common/mock/yunrank.js'
+import { useRouter } from 'vue-router'
 export default {
   name: 'HomeAnchor',
   components: {
@@ -92,7 +99,7 @@ export default {
       pageSize: 12
     })
     const onChange = () => {}
-
+    const route = useRouter()
     const onLoad = () => {
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
@@ -117,11 +124,21 @@ export default {
         }
       }, 1000)
     }
+    const onLinkPage = () => {
+      route.push({
+        name: 'Playlist',
+        params: {
+          name: '云音乐说唱榜',
+          istop: 1
+        }
+      })
+    }
 
     return {
       ...toRefs(state),
       onLoad,
-      onChange
+      onChange,
+      onLinkPage
     }
   }
 }

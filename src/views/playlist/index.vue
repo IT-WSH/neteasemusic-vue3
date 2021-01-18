@@ -1,15 +1,18 @@
 <template>
-  <div class="sheet">
+  <div class="playlist">
+    <app-header :placeholder="false" backgroundColor="transparent"></app-header>
     <van-list
       v-model:loading="loading"
       :finished="finished"
       finished-text="没有更多了"
       @load="onLoad"
     >
-      <div class="sheet_head flex-lra">
+      <div class="sheet_head flex-lra safe-area-inset-top">
         <div
           class="blurbg"
-          style='background-image: url("http://p4.music.126.net/fEfmDukmQ-n6uEUYSRSecQ==/109951162930643290.jpg?param=500y500"); background-color: rgb(238, 238, 238);'
+          :style="{
+            'background-image': `url(${cover})`
+          }"
         ></div>
         <div class="head_l">
           <van-image
@@ -30,13 +33,6 @@
           <div class="dsc text-over">
             用不一样的方式，演绎最打动人心的好音乐用不一样的方式，演绎最打动人心的好音乐
           </div>
-        </div>
-      </div>
-      <div class="nav flex-a">
-        <div class="nav_box flex-aj" @click="showListFun">
-          <span v-if="!selectObj">全部歌单</span>
-          <span v-else>{{ selectObj.name }}</span>
-          <van-icon name="arrow" size="14" color="#a0a0a0"></van-icon>
         </div>
       </div>
       <div class="list_con flex-lra">
@@ -64,13 +60,12 @@
         </div>
       </div>
     </van-list>
-    <cat-list ref="catListRef" @select="select">111</cat-list>
   </div>
 </template>
 <script>
 import { toRefs, reactive } from 'vue'
 import { List, Cell, Image, Icon } from 'vant'
-import CatList from './cat-list.vue'
+import AppHeader from '@/components/app-header.vue'
 export default {
   name: 'HomeSheet',
   components: {
@@ -78,15 +73,15 @@ export default {
     [Cell.name]: Cell,
     [Image.name]: Image,
     [Icon.name]: Icon,
-    CatList
+    AppHeader
   },
   setup() {
     const state = reactive({
       loading: false,
       finished: false,
       list: [],
-      catListRef: null,
-      selectObj: null
+      cover:
+        'http://p4.music.126.net/EJyXfGYsiHxxxoCiTAz6Kg==/109951165611553137.jpg'
     })
     const onLoad = () => {
       // 异步更新数据
@@ -103,18 +98,9 @@ export default {
         }
       }, 500)
     }
-    const showListFun = () => {
-      state.catListRef.setShow()
-    }
-    const select = res => {
-      state.selectObj = res
-    }
-
     return {
       ...toRefs(state),
-      onLoad,
-      showListFun,
-      select
+      onLoad
     }
   }
 }
@@ -122,31 +108,19 @@ export default {
 <style lang="scss" scoped>
 .sheet {
   width: 100%;
-  .nav {
-    width: 100%;
-    height: 100px;
-    padding: 0 30px;
-    box-sizing: border-box;
-    .nav_box {
-      min-width: 100px;
-      height: 54px;
-      border-radius: 30px;
-      overflow: hidden;
-      padding: 0 20px 0 26px;
-      border: 1px solid #a0a0a0;
-
-      span {
-        font-size: 24px;
-        color: #232323;
-        padding-right: 10px;
-      }
-    }
-  }
+}
+.headerblur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 90px;
+  width: 100%;
+  overflow: hidden;
+  z-index: 10;
 }
 .sheet_head {
   width: 100%;
-  padding: 28px;
-  box-sizing: border-box;
+  height: 500px;
   position: relative;
   overflow: hidden;
   .head_l {

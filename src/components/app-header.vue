@@ -1,5 +1,5 @@
 <template>
-  <div class="header" :style="{ backgroundColor: backgroundColor }">
+  <div class="header">
     <van-nav-bar
       :title="title"
       :left-text="leftText"
@@ -11,6 +11,8 @@
       :safe-area-inset-top="true"
       @click-left="onClickLeft"
       @click-right="onClickRight"
+      z-index="20"
+      :style="{ backgroundColor: backgroundColor }"
     >
       <template #left v-if="!leftArrow">
         <slot name="left"></slot>
@@ -80,5 +82,8 @@ export default {
 }
 /deep/.van-nav-bar {
   background: transparent;
+}
+/deep/.van-nav-bar__content {
+  height: 90px;
 }
 </style>

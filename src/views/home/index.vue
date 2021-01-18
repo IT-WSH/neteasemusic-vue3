@@ -39,7 +39,7 @@
 <script>
 import { toRefs, reactive, onMounted, ref } from 'vue'
 import { Tabs, Tab } from 'vant'
-import { storage } from '@/utils/storage.js'
+import { storageSession } from '@/utils/storage.js'
 import HomeSelf from './components/home-self.vue'
 import HomeSheet from './components/home-sheet.vue'
 import HomeAnchor from './components/home-anchor.vue'
@@ -80,7 +80,7 @@ export default {
     })
     // 设置当前位置
     const setTabIndex = () => {
-      let index = storage('homeTabIndex') || 0
+      let index = storageSession('homeTabIndex') || 0
       state.navList[index].status = true
       state.active = index
     }
@@ -88,7 +88,7 @@ export default {
     onMounted(() => {})
     // tab切换
     const changeTabFun = index => {
-      storage('homeTabIndex', index)
+      storageSession('homeTabIndex', index)
       state.navList[index].status = true
       count.value++
       document.body.scrollTop = document.documentElement.scrollTop = 0
