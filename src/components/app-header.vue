@@ -1,30 +1,30 @@
 <template>
-  <div class="header">
-    <van-nav-bar
-      :title="title"
-      :left-text="leftText"
-      :right-text="rightText"
-      :left-arrow="leftArrow"
-      :border="border"
-      :fixed="fixed"
-      :placeholder="placeholder"
-      :safe-area-inset-top="true"
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
-      z-index="20"
-      :style="{ backgroundColor: backgroundColor }"
-    >
-      <template #left v-if="!leftArrow">
-        <slot name="left"></slot>
-      </template>
-      <template #title v-if="!title">
-        <slot name="title"></slot>
-      </template>
-      <template #right>
-        <slot name="right"></slot>
-      </template>
-    </van-nav-bar>
-  </div>
+  <!-- <div class="header"> -->
+  <van-nav-bar
+    :title="title"
+    :left-text="leftText"
+    :right-text="rightText"
+    :left-arrow="leftArrow"
+    :border="border"
+    :fixed="fixed"
+    :placeholder="placeholder"
+    :safe-area-inset-top="true"
+    @click-left="onClickLeft"
+    @click-right="onClickRight"
+    z-index="20"
+    :style="{ backgroundColor: backgroundColor }"
+  >
+    <template #left v-if="!leftArrow">
+      <slot name="left"></slot>
+    </template>
+    <template #title v-if="!title">
+      <slot name="title"></slot>
+    </template>
+    <template #right>
+      <slot name="right"></slot>
+    </template>
+  </van-nav-bar>
+  <!-- </div> -->
 </template>
 
 <script>

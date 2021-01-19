@@ -1,37 +1,66 @@
 <template>
   <div class="playlist">
-    <app-header :placeholder="false" backgroundColor="transparent"></app-header>
+    <app-header
+      :placeholder="false"
+      :title="'说唱榜'"
+      :backgroundColor="backgroundColor"
+    ></app-header>
     <van-list
       v-model:loading="loading"
       :finished="finished"
       finished-text="没有更多了"
       @load="onLoad"
     >
-      <div class="sheet_head flex-lra safe-area-inset-top">
+      <div class="sheet_head safe-area-inset-top">
         <div
           class="blurbg"
           :style="{
             'background-image': `url(${cover})`
           }"
         ></div>
-        <div class="head_l">
-          <van-image
-            width="100%"
-            height="100%"
-            src="http://p4.music.126.net/fEfmDukmQ-n6uEUYSRSecQ==/109951162930643290.jpg?param=200y200"
-            fit="cover"
-            radius="8"
-          >
-          </van-image>
-        </div>
-        <div class="head_r flex-ajd">
-          <div class="info flex-a">
-            <van-icon name="good-job-o" color="#FFC125" size="24" />
-            <span>精品歌单</span>
+        <div class="placeholder"></div>
+        <div class="head_info flex-lra">
+          <div class="head_l">
+            <van-image width="100%" height="100%" :src="cover" fit="cover">
+            </van-image>
           </div>
-          <div class="msg text-over">欧美｜让Acappella净化你的耳朵吧</div>
-          <div class="dsc text-over">
-            用不一样的方式，演绎最打动人心的好音乐用不一样的方式，演绎最打动人心的好音乐
+          <div class="head_r flex-ajd">
+            <div class="info flex-a">
+              <span>精品歌单</span>
+            </div>
+            <div class="msg text-over flex-a">
+              <div class="logo">
+                <van-image
+                  width="100%"
+                  height="100%"
+                  fit="cover"
+                  radius="50%"
+                  src="http://p1.music.126.net/KxePid7qTvt6V2iYVy-rYQ==/109951165050882728.jpg"
+                ></van-image>
+              </div>
+              <span>网易云音乐</span>
+              <van-icon name="arrow" size="12" color="#eeeeee"></van-icon>
+            </div>
+          </div>
+        </div>
+        <div class="head_tab flex-aj">
+          <div class="tab_li flex-ajd">
+            <div class="li_icon flex-aj">
+              <img src="@/assets/fav.png" alt="" />
+            </div>
+            <div class="li_tit">235689</div>
+          </div>
+          <div class="tab_li flex-ajd">
+            <div class="li_icon flex-aj">
+              <img src="@/assets/pinglun.png" alt="" />
+            </div>
+            <div class="li_tit">235689</div>
+          </div>
+          <div class="tab_li flex-ajd">
+            <div class="li_icon flex-aj">
+              <img src="@/assets/share.png" alt="" />
+            </div>
+            <div class="li_tit">235689</div>
           </div>
         </div>
       </div>
@@ -63,9 +92,10 @@
   </div>
 </template>
 <script>
-import { toRefs, reactive } from 'vue'
+import { toRefs, reactive, computed, onMounted } from 'vue'
 import { List, Cell, Image, Icon } from 'vant'
 import AppHeader from '@/components/app-header.vue'
+import { useStore } from 'vuex'
 export default {
   name: 'HomeSheet',
   components: {
@@ -76,13 +106,36 @@ export default {
     AppHeader
   },
   setup() {
+    const store = useStore()
     const state = reactive({
       loading: false,
       finished: false,
       list: [],
+      clientHeight: 0, // 头部的高度
       cover:
         'http://p4.music.126.net/EJyXfGYsiHxxxoCiTAz6Kg==/109951165611553137.jpg'
     })
+    const backgroundColor = computed(() => {
+      let scrollTop = store.state.scrollTop
+      let clientHeight = state.clientHeight
+      let opc = 0
+      if (clientHeight) {
+        if (scrollTop / clientHeight < 1) {
+          opc = (scrollTop / clientHeight).toFixed(2)
+        } else {
+          opc = 1
+        }
+      } else {
+        opc = 1
+      }
+      return `rgba(187, 44, 8,${opc})`
+    })
+    onMounted(() => {
+      state.clientHeight = document.getElementsByClassName(
+        'sheet_head'
+      )[0].clientHeight
+    })
+
     const onLoad = () => {
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
@@ -100,6 +153,7 @@ export default {
     }
     return {
       ...toRefs(state),
+      backgroundColor,
       onLoad
     }
   }
@@ -108,6 +162,30 @@ export default {
 <style lang="scss" scoped>
 .sheet {
   width: 100%;
+}
+.head_tab {
+  width: 100%;
+  padding: 20px 10px 0;
+  box-sizing: border-box;
+  .tab_li {
+    width: 33.33%;
+    height: 100%;
+    .li_icon {
+      width: 70px;
+      height: 70px;
+      overflow: hidden;
+      img {
+        width: 110px;
+        height: 110px;
+      }
+    }
+    .li_tit {
+      line-height: 40px;
+      height: 40px;
+      font-size: 28px;
+      color: #e8e8e8;
+    }
+  }
 }
 .headerblur {
   position: fixed;
@@ -123,39 +201,43 @@ export default {
   height: 500px;
   position: relative;
   overflow: hidden;
+  .placeholder {
+    width: 100%;
+    height: 100px;
+  }
+  .head_info {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 30px;
+  }
   .head_l {
-    width: 224px;
-    height: 224px;
+    width: 260px;
+    height: 260px;
   }
   .head_r {
-    width: 440px;
-    height: 224px;
+    width: 400px;
+    height: 260px;
     .info {
       width: 100%;
       font-size: 32px;
       line-height: 60px;
       height: 60px;
       color: #ffffff;
-      font-weight: bold;
-      margin-bottom: 20px;
-      span {
-        padding-left: 10px;
-      }
+      margin-bottom: 30px;
     }
     .msg {
       width: 100%;
       line-height: 40px;
-      height: 40px;
       margin-bottom: 4px;
       font-size: 26px;
       color: #ffffff;
-    }
-    .dsc {
-      width: 100%;
-      line-height: 40px;
-      height: 40px;
-      font-size: 24px;
-      color: #ffffff;
+      .logo {
+        width: 50px;
+        height: 50px;
+      }
+      span {
+        padding: 0 10px;
+      }
     }
   }
 }
@@ -172,7 +254,7 @@ export default {
   left: 0;
   top: 0;
   transform: scale(1.2);
-  background-color: transparent;
+  background-color: #eeeeee;
 }
 .list_con {
   width: 100%;

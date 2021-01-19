@@ -11,6 +11,7 @@ Object.keys(modules).forEach(key => {
 
 export default createStore({
   state: {
+    scrollTop: 0,
     test: {
       a: 1
     }
@@ -18,6 +19,9 @@ export default createStore({
   mutations: {
     setTestA(state, value) {
       state.test.a = value
+    },
+    setScrollTop(state, value) {
+      state.scrollTop = value
     }
   },
   actions: {},
