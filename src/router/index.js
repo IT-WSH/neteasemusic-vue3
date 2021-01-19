@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 const files = require.context('./modules', false, /\.js$/)
 const allRouter = []
 files.keys().forEach(file => {
@@ -17,7 +18,7 @@ const routes = [
     },
     children: [
       {
-        path: '/home',
+        path: 'home',
         name: 'Home',
         component: () =>
           import(/* webpackChunkName: "about" */ '@/views/home/index.vue'),
@@ -27,7 +28,7 @@ const routes = [
         }
       },
       {
-        path: '/hot',
+        path: 'hot',
         name: 'Hot',
         component: () =>
           import(/* webpackChunkName: "about" */ '@/views/hot/index.vue'),
@@ -37,7 +38,7 @@ const routes = [
         }
       },
       {
-        path: '/mine',
+        path: 'mine',
         name: 'Mine',
         component: () =>
           import(/* webpackChunkName: "about" */ '@/views/mine/index.vue'),
