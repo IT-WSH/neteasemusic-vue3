@@ -28,20 +28,6 @@ npm run lint
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-## 破解 vue3.x 新特性 - 洞见未来
-
-根据 vue 作者尤雨溪去年发布的 vue 3.0 开发路线，vue 3.0 很可能在 2019 年下半年与大家见面。
-
-与此同时，今年下半年初，Vue 团队先后对外发布了 `vue-function-api` 和 `vue-compisition-api` 的 RFC，供开发者提前体验 vue 3.0 的新特性，并且希望通过这些预览版的 API，来征求广大开发者的意见与反馈，从而为 vue 3.0 的后续开发和落地打下坚实与稳定的基础。
-
-本次公开课围绕最新发布的 `vue-compisition-api`，来讲解大家最关心的、同时也是 vue 3.0 最重要的一些新特性，例如 `setup()` 函数、`reactive()`、`ref()` 等这些 Vue Hooks。
-
-通过学习本次公开课，你可以先人一步掌握 vue 3.0 中的新特性，为将来 vue 3.0 的发布提前做好相应知识的储备，也为提升自己在前端行业中的竞争力添砖加瓦！
-
-> 公开课视频地址 https://www.bilibili.com/video/av69262619/
-
-> 公开课源码地址 https://gitee.com/vsdeveloper/vue3-compositionAPI-study
-
 ## 基础要求
 
 1. 了解常见的 ES6 新特性
@@ -63,17 +49,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - 生命周期函数
 
 - computed、watch、ref 等
-
-## 相关资源
-
-- 【知乎 - Vue Function-based API RFC】https://zhuanlan.zhihu.com/p/68477600
-
-- 【github - [vuejs](https://github.com/vuejs)/**composition-api**】https://github.com/vuejs/composition-api
-
-- 【github - [composition-api](https://github.com/vuejs/composition-api)/**CHANGELOG.md**】https://github.com/vuejs/composition-api/blob/master/CHANGELOG.md
-
-- 【开源中国 - 尤雨溪公布 Vue 3.0 开发路线：将从头开始重写 3.0】https://www.oschina.net/news/100515/plans-for-the-next-iteration-of-vue-js
-
 ## 初始化项目
 
 1. 安装 vue-cli 4.5.0 及以上版本
